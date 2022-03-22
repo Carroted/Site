@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    #pylonImg {
+        border-radius: 50%;
+        height: 100px;
+        width: 100px;
+        font-size: 65px;
+        transform-origin: center bottom;
+        position: fixed;
+        bottom: 0;
+        right: 15%;
+        animation: pylonA 0.8s ease 3s 3 reverse none;
+        z-index: 200000;
+    }
+</style>
+<!-- Meta tags for SEO and social sharing -->
+<link rel="canonical" href="https://carroted.glitch.me/404.html" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="404 | Page not found" />
+<meta property="og:url" content="https://carroted.glitch.me/404.html" />
+<meta property="og:image"
+    content="https://cdn.glitch.global/d8a67d05-9666-4c27-b92c-98fd552701fd/Carroted%20Icon.ico?v=1647992663430" />
+<meta name="theme-color" content="#ff7e2c">
+
+
+<head>
+    <link rel="icon"
+        href="/media/icon.svg">
+    <title>Carroted</title>
+    <script src="/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+
+<body>
+
+    <div id="header"></div>
+    <div id="footer"></div>
+  <div>
+      <br><br><br><br>
+  </div>
+    <script>
+        $(function () {
+            $("#header").load("/header.html");
+            $("#footer").load("/footer.html");
+        });
+
+    </script>
+
+
+
+    <span style="font-size:200px">404</span><br><span style="font-size:25px" id="notFoundText">Page not
+        found</span><br><br><br><a href="/" id="returnText">Return to homepage</a>
+
+    <div id="pylonImg">
+        <img style="height: 100px;" alt="Pylon"
+            src="https://cdn.glitch.global/d8a67d05-9666-4c27-b92c-98fd552701fd/Cone%20desat-export.png?v=1646599490834" />
+    </div>
+    <script>
+
+
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+        // Get the value of "type" in eg "https://example.com/?type=blog"
+        let value = params.type; // "blog"
+
+        if (value) {
+            if (value == "blog") {
+                $("#returnText").text("Return to blog");
+                // Set link to /blog
+                $("#returnText").attr("href", "/blog");
+
+                $("#notFoundText").text("Article not found");
+
+            }
+        }
+
+
+
+
+
+
+
+
+
+        function copyToClipboard(str) {
+            const el = document.createElement('textarea');
+            el.value = str;
+            el.setAttribute('readonly', '');
+            el.style.position = 'absolute';
+            el.style.left = '-9999px';
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+        };
+
+
+
+        var offsetX = 0;
+        var offsetY = 0;
+        var moveSpeed = 6;
+        var fi = 20;
+
+        var map = {}; // You could also use an array
+        onkeydown = onkeyup = function (e) {
+            e = e || event; // to deal with IE
+            map[e.keyCode] = e.type == 'keydown';
+            /* insert conditional here */
+        }
+
+        function isKey(key) {
+            return map[key.charCodeAt(0)];
+        }
+
+
+
+
+
+        //document.getElementById("chest").scale(50, 50);
+
+        function moveSection(idStr, xOffset, yOffset) {
+            var domElemnt = document.getElementById(idStr);
+            if (domElemnt) {
+                if (forward) {
+                    domElemnt.style.transform = 'translate(' + xOffset + 'px,' + yOffset + 'px)';
+                }
+                else {
+                    domElemnt.style.transform = 'translate(' + xOffset + 'px,' + yOffset + 'px) scaleX(-1)';
+                }
+            }
+        }
+        var jumpFrames = 0;
+        var forward = true;
+        function move() {
+            if (map[68]) {
+                offsetX += moveSpeed;
+                forward = true;
+            }
+            if (map[65]) {
+                offsetX -= moveSpeed;
+                forward = false;
+            }
+            if (map[87]) {
+                if (offsetY == 0) {
+
+                    jumpFrames = 6;
+                    offsetY += 15 * jumpFrames;
+                }
+
+            }
+            if (map[83]) {
+                offsetY += 20;
+            }
+            /*  if(keyDown && key.toLowerCase() == "a")
+              {
+                offsetX -= 10;
+            
+              }
+              if(keyDown && key.toLowerCase() == "w")
+              {
+                offsetY -= 10;
+            
+              }
+              if(keyDown && key.toLowerCase() == "s")
+              {
+                offsetY += 10;
+            
+              }*/
+            if (offsetY > 0) {
+                offsetY = 0;
+            }
+            moveSection("pylonImg", offsetX, offsetY)
+            //document.getElementById("ee").innerHTML = offsetY;
+            offsetY += 10;
+            if (offsetY > 0) {
+                offsetY = 0;
+            }
+
+            if (jumpFrames > 0) {
+                if (jumpFrames % 2 == 1) {
+
+                    offsetY -= 20 * jumpFrames;
+                }
+                jumpFrames--;
+            }
+        }
+
+        setInterval(move, fi);
+    </script>
+    <br><br>
+    <div id="ee">
+
+    </div>
+</body>
+
+</html>

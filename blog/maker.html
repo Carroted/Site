@@ -1,0 +1,127 @@
+<meta property="og:image"
+    content="https://cdn.glitch.global/d8a67d05-9666-4c27-b92c-98fd552701fd/Carroted%20Icon.ico?v=1647992663430" />
+<meta name="theme-color" content="#ff7e2c">
+
+
+<head>
+    <link rel="icon"
+        href="/media/icon.svg">
+    <title>Carroted Blog Post Maker</title>
+    <script src="/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+Welcome to the blog post maker for Carroted members or guest writers!<br><br>If you aren't a Carroted member or invited
+writer, this might not be of much use to you, unless you're making your own blog using
+the Carroted Blog code as a base.<br><br>
+
+Please fill out the following fields with your article's info and content! You can use an HTML editor if you want, such
+as <a href="https://html-online.com/editor/">https://html-online.com/editor/</a>, or just manually write HTML for extra
+customization.<br><br>
+
+Once done, just send the downloaded file to me (Alex) on Discord! I'll add it to the blog.<br><br>Enjoy!<br><br><br>
+<style>
+    .inputfield {
+        background-color: #2c3042;
+        /* Green */
+        border: none;
+        color: white;
+
+        padding: 4px 9px;
+        text-align: left;
+        text-decoration: none;
+        display: inline-block;
+        font-family: Lexend;
+        font-size: 14px;
+        margin: 4px 2px;
+    }
+
+    .inputfield {
+        width: 100%;
+    }
+
+    @media only screen and (min-width: 760px) {
+        .inputfield {
+
+            width: 500px;
+        }
+
+    }
+</style>
+
+<input class="inputfield" type="text" id="inputTitle" placeholder="Article title" /><br>Article title<br><br>
+<input class="inputfield" type="text" id="inputName"
+    placeholder="Your writer ID (I should have given you one on Discord. If not, DM me)" /><br>Writer ID (needs to be
+one I sent you, random unregistered names won't work)<br><br>
+<input class="inputfield" type="text" id="inputDescription"
+    placeholder="A short description of your article shown on the articles list" /><br>Description<br><br>
+<input class="inputfield" type="text" id="inputThumbnail"
+    placeholder="The thumbnail image URL for your article, shown on the articles list" /><br>Article thumbnail URL (you can use an <a
+    href="https://imgur.com/upload">Imgur</a> link). It should be more wide than tall. <br><br>
+<textarea class="inputfield" rows="20" type="text" id="inputContent"
+    placeholder="The content of the article"></textarea><br>The
+HTML
+content
+of the article (you can use an HTML editor if you want, such as <a
+    href="https://html-online.com/editor/">https://html-online.com/editor/</a>, or just manually write HTML for extra
+customization)<br><br><br>
+
+<!-- submit button -->
+<button class="button" id="submitButton" onclick="downloadArticle()">Submit and download article</button>
+
+<!-- Articles are JSON files such as 
+{
+  "title":"Introducing Carroted Blog",
+  "author":"alexsour",
+  "date":"1647298478",
+  "thumbnail":"https://cdn.glitch.global/d8a67d05-9666-4c27-b92c-98fd552701fd/blog%20creation.png?v=1647295123134",
+  "description":"The Carroted Blog is a place where news and updates about Carroted or Carroted projects will be posted.",
+  "content":"<p>Since it's creation, there has been no source for Carroted news. While certain announcements were posted in someprojects' Discord servers, there was no one source for all Carroted news.</p><p>Introducing Carroted Blog, a place where news and updates about Carroted or Carroted projects will be posted.</p><p>There is no fixed schedule of when posts will be written and/or published, but anytime, one of our members can post anew article!</p><p>I really hope you enjoy the blog!</p>"
+}
+
+We want to export the values of the input fields and the text area to a JSON file and download it. -->
+
+<script>
+    /*
+    Articles are JSON files such as 
+{
+  "title":"Introducing Carroted Blog",
+  "author":"alexsour",
+  "date":"1647298478",
+  "thumbnail":"https://cdn.glitch.global/d8a67d05-9666-4c27-b92c-98fd552701fd/blog%20creation.png?v=1647295123134",
+  "description":"The Carroted Blog is a place where news and updates about Carroted or Carroted projects will be posted.",
+  "content":"<p>Since it's creation, there has been no source for Carroted news. While certain announcements were posted in someprojects' Discord servers, there was no one source for all Carroted news.</p><p>Introducing Carroted Blog, a place where news and updates about Carroted or Carroted projects will be posted.</p><p>There is no fixed schedule of when posts will be written and/or published, but anytime, one of our members can post anew article!</p><p>I really hope you enjoy the blog!</p>"
+}
+
+We want to export the values of the input fields and the text area to a JSON file and download it.
+*/
+
+    function downloadArticle() {
+        var title = document.getElementById("inputTitle").value;
+        var author = document.getElementById("inputName").value;
+        var description = document.getElementById("inputDescription").value;
+        var thumbnail = document.getElementById("inputThumbnail").value;
+        var content = document.getElementById("inputContent").value;
+
+        var article = {
+            "title": title,
+            "author": author,
+            // The date should be an epoch timestamp
+            "date": Date.now() / 1000,
+            "thumbnail": thumbnail,
+            "description": description,
+            "content": content
+        };
+
+        var json = JSON.stringify(article);
+
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(json));
+        element.setAttribute('download', title + ".json");
+        element.style.display = 'none';
+        document.body.appendChild(element);
+        element.click();
+        document.body.removeChild(element);
+        alert("Done! Send the article file to me (Alex) on Discord!");
+    }
+
+</script>

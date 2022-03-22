@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+
+    
+
+    .inputfield {
+        background-color: #2c3042;
+        /* Green */
+        border: none;
+        color: white;
+
+        padding: 4px 9px;
+        text-align: left;
+        text-decoration: none;
+        display: inline-block;
+        font-family: Lexend;
+        font-size: 14px;
+        margin: 4px 2px;
+    }
+
+    ::placeholder {
+        color: #535663;
+    }
+
+    progress {
+        display: inline-block;
+        width: 100%;
+        background-color: #07080e;
+        color: #47a14a;
+    }
+
+    progress::-moz-progress-bar {
+        background-color: #47a14a;
+    }
+
+    progress::-webkit-progress-bar {
+        background-color: #07080e;
+    }
+
+    progress::-webkit-progress-value {
+        background-color: #47a14a !important;
+    }
+
+    progress[value]::-webkit-progress-bar {
+        background-color: #07080e;
+    }
+
+    progress[value] {
+        -webkit-appearance: none;
+    }
+
+    progress[value]::-webkit-progress-value {
+        background-color: #47a14a;
+    }
+
+    a:link {
+        color: #5295e3;
+    }
+
+    a:visited {
+        color: #5295e3;
+
+    }
+
+    a:hover {
+        color: #555dd9;
+        background-color: transparent;
+        text-decoration: underline;
+    }
+
+    a:active {
+        color: #2c2b7a;
+        background-color: transparent;
+        text-decoration: underline;
+    }
+  
+  
+  
+  .inputfield
+  {
+    width: 100%;
+  }
+
+    @media only screen and (min-width: 760px) {
+      .inputfield
+      {
+        
+        width: 500px;
+      }
+      progress
+      {
+        width: 300px;
+      
+      }
+  }
+</style>
+<!-- Meta tags for SEO and social sharing -->
+<link rel="canonical" href="https://carroted.glitch.me/pylon-pixel-2/translation-creator/" />
+<meta name="description" content="This tool helps you translate Pylon Pixel 2 into your language." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="robots" content="index,follow" />
+<meta property="og:title" content="Pylon Pixel 2 Translation Creator Tool" />
+<meta property="og:url" content="https://carroted.glitch.me/pylon-pixel-2/translation-creator/" />
+<meta property="og:description" content="This tool helps you translate Pylon Pixel 2 into your language." />
+<meta property="og:image"
+    content="https://cdn.glitch.global/d8a67d05-9666-4c27-b92c-98fd552701fd/Carroted%20Icon.ico?v=1647992663430" />
+<meta name="theme-color" content="#ff7e2c">
+
+
+<head>
+    <link rel="icon"
+        href="/media/icon.svg">
+    <title>Pylon Pixel 2 Translation Creator Tool</title>
+    <script src="/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+
+<body>
+
+    <div id="header"></div>
+    <div id="footer"></div>
+  <div>
+      <br><br><br><br>
+  </div>
+    <script>
+        $(function () {
+            $("#header").load("/header.html");
+            $("#footer").load("/footer.html");
+        });
+    </script>
+
+
+  <div class="card">
+
+    <!-- don't translate anything before the game is ready for it, or you'll be wasting your time! -->
+    <h2>Pylon Pixel 2 Translation Creator Tool <span style="font-size: 15px;">v1.0.0 by <a
+                href="https://github.com/Alex-Sour" target="_blank">Alex_Sour</a></span></h2><span
+        style="font-size:5px"><br><br></span><span style="word-wrap:break-word;">
+    This tool will help you translate the game into your language. Before beginning, please note the language code of
+    the language you
+    are translating to, which you can find on <a href="http://www.lingoes.net/en/translator/langcode.htm"
+        target="_blank">http://www.lingoes.net/en/translator/langcode.htm</a>
+    (be sure to pick the right one!)</span><br><br>
+    Simply type the text shown below in the field, but in your language, and hit enter. Repeat this until you have
+    translated all the text. (There's a progress bar and a counter at the bottom, so you'll know how much you have
+    left!)<br><br>Throughout your translation, you may encounter text with numbers in curly braces such as <code>{0}</code>, <code>{1}</code>, <code>{2}</code>, etc. These will be replaced with other text, like <code>"{0} added to inventory"</code> could be <code>"Flashlight added to inventory"</code>. <br>Make sure to keep the text with numbers in curly braces written exactly as they are, or the game won't recognize them. (Example: Change <code>"{0} was equipped"</code> to <code>"{0} était équippé"</code> for a french translation, and not <code>"[0] était équippé"</code> or <code>"{0} was equipped"</code>.)<br><br>
+    Thank you for your help! If you choose to publish your translation, and it gets accepted, you will be credited! (if
+    you want)<br><br>Submissions will be denied if they are troll submissions, filled with gibberish/spam, or simply if
+    the translations seem to be mostly incorrect.<br><br><b>This tool is for creating NEW translations. To update
+        existing translations, please use the <a href="/pylon-pixel-2/translation-updater/">Translation Updater
+            Tool</a>.</b><br><br>
+    <p id="currentLine"
+        style="border-style:solid; border-radius: 5px; border-width: 2px; padding:5px; border-color: #535663;">
+        Loading...</p>
+    <!-- input field for translations-->
+    <input class="inputfield" type="text" id="translate" placeholder="Translate the text above"
+        onkeydown="if (event.keyCode == 13) { submit(); return false; }" /><br><br>
+    <!-- progress bar (with id of progress) -->
+    <progress id="progress" max="100" value="0"></progress>
+    <div id="progressText" style="display: inline-block;">Loading...</div>
+</div>
+
+ 
+    <script>
+        /*
+        * FileSaver.js
+        * A saveAs() FileSaver implementation.
+        *
+        * By Eli Grey, http://eligrey.com
+        *
+        * License : https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md (MIT)
+        * source  : http://purl.eligrey.com/github/FileSaver.js
+        */
+
+        // The one and only way of getting global scope in all environments
+        // https://stackoverflow.com/q/3277182/1008999
+        var _global = typeof window === 'object' && window.window === window
+            ? window : typeof self === 'object' && self.self === self
+                ? self : typeof global === 'object' && global.global === global
+                    ? global
+                    : this
+
+        function bom(blob, opts) {
+            if (typeof opts === 'undefined') opts = { autoBom: false }
+            else if (typeof opts !== 'object') {
+                console.warn('Deprecated: Expected third argument to be a object')
+                opts = { autoBom: !opts }
+            }
+
+            // prepend BOM for UTF-8 XML and text/* types (including HTML)
+            // note: your browser will automatically convert UTF-16 U+FEFF to EF BB BF
+            if (opts.autoBom && /^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(blob.type)) {
+                return new Blob([String.fromCharCode(0xFEFF), blob], { type: blob.type })
+            }
+            return blob
+        }
+
+        function download(url, name, opts) {
+            var xhr = new XMLHttpRequest()
+            xhr.open('GET', url)
+            xhr.responseType = 'blob'
+            xhr.onload = function () {
+                saveAs(xhr.response, name, opts)
+            }
+            xhr.onerror = function () {
+                console.error('could not download file')
+            }
+            xhr.send()
+        }
+
+        function corsEnabled(url) {
+            var xhr = new XMLHttpRequest()
+            // use sync to avoid popup blocker
+            xhr.open('HEAD', url, false)
+            try {
+                xhr.send()
+            } catch (e) { }
+            return xhr.status >= 200 && xhr.status <= 299
+        }
+
+        // `a.click()` doesn't work for all browsers (#465)
+        function click(node) {
+            try {
+                node.dispatchEvent(new MouseEvent('click'))
+            } catch (e) {
+                var evt = document.createEvent('MouseEvents')
+                evt.initMouseEvent('click', true, true, window, 0, 0, 0, 80,
+                    20, false, false, false, false, 0, null)
+                node.dispatchEvent(evt)
+            }
+        }
+
+        // Detect WebView inside a native macOS app by ruling out all browsers
+        // We just need to check for 'Safari' because all other browsers (besides Firefox) include that too
+        // https://www.whatismybrowser.com/guides/the-latest-user-agent/macos
+        var isMacOSWebView = _global.navigator && /Macintosh/.test(navigator.userAgent) && /AppleWebKit/.test(navigator.userAgent) && !/Safari/.test(navigator.userAgent)
+
+        var saveAs = _global.saveAs || (
+            // probably in some web worker
+            (typeof window !== 'object' || window !== _global)
+                ? function saveAs() { /* noop */ }
+
+                // Use download attribute first if possible (#193 Lumia mobile) unless this is a macOS WebView
+                : ('download' in HTMLAnchorElement.prototype && !isMacOSWebView)
+                    ? function saveAs(blob, name, opts) {
+                        var URL = _global.URL || _global.webkitURL
+                        var a = document.createElement('a')
+                        name = name || blob.name || 'download'
+
+                        a.download = name
+                        a.rel = 'noopener' // tabnabbing
+
+                        // TODO: detect chrome extensions & packaged apps
+                        // a.target = '_blank'
+
+                        if (typeof blob === 'string') {
+                            // Support regular links
+                            a.href = blob
+                            if (a.origin !== location.origin) {
+                                corsEnabled(a.href)
+                                    ? download(blob, name, opts)
+                                    : click(a, a.target = '_blank')
+                            } else {
+                                click(a)
+                            }
+                        } else {
+                            // Support blobs
+                            a.href = URL.createObjectURL(blob)
+                            setTimeout(function () { URL.revokeObjectURL(a.href) }, 4E4) // 40s
+                            setTimeout(function () { click(a) }, 0)
+                        }
+                    }
+
+                    // Use msSaveOrOpenBlob as a second approach
+                    : 'msSaveOrOpenBlob' in navigator
+                        ? function saveAs(blob, name, opts) {
+                            name = name || blob.name || 'download'
+
+                            if (typeof blob === 'string') {
+                                if (corsEnabled(blob)) {
+                                    download(blob, name, opts)
+                                } else {
+                                    var a = document.createElement('a')
+                                    a.href = blob
+                                    a.target = '_blank'
+                                    setTimeout(function () { click(a) })
+                                }
+                            } else {
+                                navigator.msSaveOrOpenBlob(bom(blob, opts), name)
+                            }
+                        }
+
+                        // Fallback to using FileReader and a popup
+                        : function saveAs(blob, name, opts, popup) {
+                            // Open a popup immediately do go around popup blocker
+                            // Mostly only available on user interaction and the fileReader is async so...
+                            popup = popup || open('', '_blank')
+                            if (popup) {
+                                popup.document.title =
+                                    popup.document.body.innerText = 'downloading...'
+                            }
+
+                            if (typeof blob === 'string') return download(blob, name, opts)
+
+                            var force = blob.type === 'application/octet-stream'
+                            var isSafari = /constructor/i.test(_global.HTMLElement) || _global.safari
+                            var isChromeIOS = /CriOS\/[\d]+/.test(navigator.userAgent)
+
+                            if ((isChromeIOS || (force && isSafari) || isMacOSWebView) && typeof FileReader !== 'undefined') {
+                                // Safari doesn't allow downloading of blob URLs
+                                var reader = new FileReader()
+                                reader.onloadend = function () {
+                                    var url = reader.result
+                                    url = isChromeIOS ? url : url.replace(/^data:[^;]*;/, 'data:attachment/file;')
+                                    if (popup) popup.location.href = url
+                                    else location = url
+                                    popup = null // reverse-tabnabbing #460
+                                }
+                                reader.readAsDataURL(blob)
+                            } else {
+                                var URL = _global.URL || _global.webkitURL
+                                var url = URL.createObjectURL(blob)
+                                if (popup) popup.location = url
+                                else location.href = url
+                                popup = null // reverse-tabnabbing #460
+                                setTimeout(function () { URL.revokeObjectURL(url) }, 4E4) // 40s
+                            }
+                        }
+        )
+
+        _global.saveAs = saveAs.saveAs = saveAs
+
+        if (typeof module !== 'undefined') {
+            module.exports = saveAs;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        var file = `# Hey! If you're translating Pylon Pixel 2, don't change the text before the equal signs! Those are important so the game knows what's what. Also, you can replace this line with credits if you want! Example: "Translated by Joe" -Alex
+
+
+
+ui.inventory.title=Inventory
+ui.inventory.auto.true=Automatic
+ui.inventory.auto.false=Semi-automatic
+ui.inventory.fireSpeed=Fires at {0} {1}
+ui.inventory.rps=rounds/sec
+ui.inventory.spr=sec/rounds
+ui.inventory.ammo=Ammo
+ui.inventory.infiniteAmmo=Infinite ammo
+ui.inventory.dragInfo=Drag and drop weapons to the hotbar to them
+
+ui.weaponAdded={0} added to inventory
+ui.ammoAdded={0} rounds for {1} added to inventory
+
+ui.paused.return=Return to game
+ui.paused.invite=Invite people
+ui.paused.settings=Settings
+ui.paused.exit=Exit to menu
+
+
+
+game.name=Pylon Pixel 2
+
+
+
+weapons.coneArmyBlaster=Cone Army Blaster
+weapons.coneArmyBlaster.description=You got this from serving in the cone army. It was given to you by Ben, a white cone from the base near Giant Waterfall.
+weapons.anticPrototype1=Anti-Cone Prototype Blaster 1
+weapons.anticPrototype1.description=Obtained from anti-cones.
+weapons.anticUNSAFE=Anti-Cone UNSAFE Blaster
+weapons.anticUNSAFE.description=Obtained from anti-cones. Unsafe to use, incredibly unstable.
+weapons.anticPrototype2=Anti-Cone Prototype Blaster 2
+weapons.anticPrototype2.description=Obtained from anti-cones. Scrapped prototype due to it being slightly unstable. The first prototype was chosen instead.
+weapons.coneArmyAuto=Cone Army Auto-Blaster
+weapons.coneArmyAuto.description=Gotten from the shop in Domus Village.
+weapons.ultraBlueBlaster=Ultra BLUE Blaster
+weapons.ultraBlueBlaster.description=Gotten from an anti-cone shop.
+weapons.orangeBlaster=Orange Blaster PRO
+weapons.orangeBlaster.description=Gotten from an anti-cone shop.
+weapons.purpleBlaster=Super Purple Shot
+weapons.purpleBlaster.description=You only have one bullet. Use it wisely.
+weapons.bombLauncher=Bomb Launcher
+weapons.bombLauncher.description=Wow, look! A round explody object!
+weapons.rpgLauncher=RPG Launcher
+weapons.rpgLauncher.description=uh oh uh oh looks like uh oh
+weapons.caution=CautionYourWelcome
+weapons.caution.description=WelcomeYourThank
+weapons.chad=Speedrunner's Friend
+weapons.chad.description=wow you dont even need to waste time earning gold to get this, how great and convenient
+weapons.poison=Poison Blaster
+weapons.poison.description=Fires poison fruits! Wow! How amazing and cool and awesome and great and really just overall an interesting concept.
+
+
+
+# I recommend changing the names to basically the equivalent of it in the language you're translating to.
+characters.jack=Jack
+characters.jen=Jen
+characters.bill=Bill
+characters.ninety=Ninety
+characters.kate=Kate
+characters.alexsour=Alex_Sour
+characters.1hunter=1Hunter
+
+
+
+1.name=Domus Village
+
+1.sign.top=NOW EXITING/ENTERING
+1.sign.bottom=DOMUS VILLAGE
+
+1.jack.default=Hey, I heard something really weird the other day. Apparently some people think the anti-cones hid in that cave near the lake. Do you think we should go check it out?
+1.jack.default.r0=Sure!
+1.jack.default.r1=Not now.
+1.jack.default.r2=No.
+1.jack.default.r3=I'm not sure.
+
+1.jack.accepted=Ok, cool! Let's go!
+1.jack.accepted.r0=Alright.
+1.jack.accepted.r1=Ok
+1.jack.accepted.r2=I hate this
+1.jack.accepted.r3=*sigh*
+
+1.1hunter.default=Aye mate, do you know where can I find some health fruits?
+1.1hunter.default.r0=Yes, go left.
+1.1hunter.default.r1=Nope, sorry
+1.1hunter.default.r2=Go away
+
+1.jen.default=Hey, how are you?
+1.jen.default.r0=Good, thanks!
+1.jen.default.r1=Bad.
+1.jen.default.r2=...
+1.jen.default.r3=Mind your own business.
+
+1.bill.default=This area is under construction.
+1.bill.default.r0=Alright.
+1.bill.default.r1=My bad.
+1.bill.default.r2=Nah
+1.bill.default.r3=I served in the army, let me in.
+
+1.ninety.default=...
+1.ninety.default.r0=I remember you.
+1.ninety.default.r1=Who are you?
+1.ninety.default.r2=haha im hacker
+1.ninety.default.r3=...
+
+1.alexsour.default=Heyy you're not supposed to be here but thanks for playing my game!
+1.alexsour.default.r0=Your game sucks
+1.alexsour.default.r1=Cool
+1.alexsour.default.r2=Can I join Carroted
+
+1.alexsour.carroted=you could help make our game engine! DM me on Discord at Alex_Sour#8061! (only if you know or want to learn C++)
+1.alexsour.carroted.r0=ok ill do that thanks
+1.alexsour.carroted.r1=nah
+1.alexsour.carroted.r2=idk
+
+
+
+2.name=Rumors
+
+2.jack.left=Wait, why are we going back? The cave is to the right!
+2.jack.left.r0=Oh, right!
+2.jack.left.r1=*sigh*
+2.jack.left.r2=I know
+
+2.jack.conversation=Heh, I don't think I've gone to the lake in years! What about you?
+2.jack.conversation.r0=Same here!
+2.jack.conversation.r1=I go all the time, actually!
+2.jack.conversation.r2=Just shut up.
+
+2.jack.arrived=Well, we're here! Shall we jump in?
+2.jack.arrived.r0=Heck yeah!
+2.jack.arrived.r1=I'm scared.
+2.jack.arrived.r2=Yes.
+2.jack.arrived.r3=Haha! Haha!
+
+2.jack.lake=Ha! Coward! Just kidding, I'll be waiting here.
+2.jack.lake.r0=I destroyed the giant robot and I'm the coward?
+2.jack.lake.r1=Alright.
+2.jack.lake.r2=Fine.
+
+2.jack.anti=WHOAH! WE WERE RIGHT!
+2.jack.anti.r0=AAH!
+2.jack.anti.r1=Wow!
+2.jack.anti.r2=Obviously.
+
+2.jack.sorry=Sorry for not helping you fight. I don't have a weapon, and never got training to attack without one, so... But I can offer you moral support!
+2.jack.sorry.r0=Deal.
+2.jack.sorry.r1=That's no excuse.
+2.jack.sorry.r2=It's fine.
+
+2.jack.cave=Well, I guess all we can do is go further in the cave and hope there's an exit.
+2.jack.cave.r0=Yeah.
+2.jack.cave.r1=True
+2.jack.cave.r2=*sigh*
+2.jack.cave.r3=I guess
+
+2.sign.top=DOMUS VILLAGE
+2.sign.bottom=LAKE
+
+2.sign2.bottom=WARNING: CAVE
+2.sign2.top=Be careful! Watch out! Don't fall!
+
+2.sign3.bottom=THIS IS THE LAKE
+2.sign3.top=This is quite a large body of water, we think.
+
+3.jack.fall=AAA! I'm falling! Keep going, I'll catch up with you!
+3.jack.fall.r0=Alright! Be careful!
+3.jack.fall.r1=Cool.
+3.jack.fall.r2=Oh no!
+3.jack.fall.r3=Good.`;
+
+        // Split into lines, remove empty lines and lines that start with #
+        var lines = file.split("\n").filter(function (line) {
+            return line.trim() != "" && line.charAt(0) != "#";
+        });
+        var currentLine = 0;
+
+        var yourLines = []; // lines you've translated
+
+        // set the currentLine to the next line's value (after the equal sign)
+        document.getElementById("currentLine").innerHTML =
+            lines[currentLine].split("=")[1];
+        // clear the input field
+        document.getElementById("translate").value = "";
+        // update the progress bar
+        document.getElementById("progress").value = currentLine;
+        document.getElementById("progress").max = lines.length;
+
+        // update the progress text
+        document.getElementById("progressText").innerHTML =
+            currentLine + "/" + lines.length;
+
+        function done() {
+            var yourName = prompt("What is your name? (To credit you in the file. If you don't want credit, leave this empty.)");
+            var credit;
+            var languageCode = prompt("What is the language code of the language you're translating to? (e.g. en-US) Here's a list of language codes: http://www.lingoes.net/en/translator/langcode.htm (be sure to pick the right one!)");
+            var credit2 = "this.translators=";
+
+            if (yourName == null) {
+                credit = "# Translated by an anonymous person.";
+                credit2 = "";
+            }
+            else if (yourName.trim() == "") {
+                credit = "# Translated by an anonymous person.";
+                credit2 = "";
+            }
+            else {
+                credit = "# Translated by " + yourName.trim() + ".";
+                credit2 += yourName.trim();
+            }
+
+            if (languageCode == null) {
+                languageCode = "an unknown language";
+            }
+            else if (languageCode.trim() == "") {
+                languageCode = "an unknown language";
+            }
+
+            // add the credit to the top of the new file
+            var newFile = credit + "\n\n" + yourLines.join("\n") + "\n\n# This file is in " + languageCode + ", and is a translation for Pylon Pixel 2.\n" + credit2;
+
+            // save the file
+            var blob = new Blob([newFile], { type: "text/plain;charset=utf-8" });
+            saveAs(blob, languageCode + ".txt");
+
+            // Remove the input field and replace the currentLine text with "Done! Send the file to Alex_Sour#8061 on Discord or add a GitHub pull request with the file!"
+            document.getElementById("translate").remove();
+            document.getElementById("currentLine").innerHTML = "Done! Send the file to Alex_Sour#8061 on Discord or add a GitHub pull request with the file!";
+        }
+
+        // when someone submits the input field, this function is called
+        function submit() {
+            if (currentLine >= lines.length) {
+                done();
+                return;
+            }
+
+            // get the value of the input field
+            var input = document.getElementById("translate").value;
+            // if the input is empty, do nothing
+            if (input == "") {
+                return;
+            }
+
+            currentLine++;
+
+            // set the currentLine to the next line's value (after the equal sign)
+            if (currentLine < lines.length) {
+                document.getElementById("currentLine").innerHTML =
+                    lines[currentLine].split("=")[1];
+            }
+            // clear the input field
+            document.getElementById("translate").value = "";
+            // add the input and what was before the line's equal sign to yourLines
+            if (currentLine <= lines.length) {
+                yourLines.push(lines[currentLine - 1].split("=")[0] + "=" + input);
+            }
+
+            // update the progress bar
+            document.getElementById("progress").value = currentLine;
+            document.getElementById("progress").max = lines.length;
+
+            // update the progress text
+            document.getElementById("progressText").innerHTML =
+                currentLine + "/" + lines.length;
+
+            // if we've reached the end of the file, alert("no more lines") for now (later, we'll export a new file similar to the old one but with the new lines)
+            if (currentLine >= lines.length) {
+                done();
+                return;
+            }
+        }
+    </script>
+</body>
+
+</html>
