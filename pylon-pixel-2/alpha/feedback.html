@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<script>
+
+    var questions = [
+        {
+            "title": "What's your name?",
+            "description": "Using the same name as your Discord username helps.",
+            "placeholder": "Name",
+            "type": "text",
+            "required": true
+        },
+        {
+            "title": "How was the latest build of Pylon Pixel 2 Alpha?",
+            "description": "Please rate the build on a scale of 1-10.",
+            "placeholder": "1-10",
+            "type": "number",
+            "required": true
+        },
+        {
+            "title": "What bugs did you encouter?",
+            "description": "If you didn't encounter any bugs, leave this blank",
+            "placeholder": "Bugs encountered (leave blank for none)",
+            "type": "text",
+            "required": false
+        },
+        {
+            "title": "Do you have any suggestions for the next build or future?",
+            "description": "If you don't have any, leave this blank.",
+            "placeholder": "Suggestions (leave blank for none)",
+            "type": "text",
+            "required": false
+        },
+        {
+            "title": "If you've played a previous build, would you consider this an improvement?",
+            "description": "If you haven't played a previous build, leave this blank.",
+            "placeholder": "Is this build better? (leave blank if you haven't played a previous build)",
+            "type": "text",
+            "required": false
+        },
+        {
+            "title": "What do you think of the controls?",
+            "description": "Do you think the controls are intuitive and easy to use? Do they look good? Are they confortable? Add any other comments on them here.",
+            "placeholder": "Your thoughts on the controls",
+            "type": "text",
+            "required": true
+        },
+        {
+            "title": "Do you have any other comments?",
+            "description": "Anything else you want to add? It could be about the game, the graphics, the controls, or anything else, even this form. If you don't have any, leave this blank.",
+            "placeholder": "Comments (leave blank for none)",
+            "type": "text",
+            "required": false
+        },
+
+    ];
+
+</script>
+
+
+<!-- Meta tags for SEO and social sharing -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="all" />
+
+
+<link rel="canonical" href="https://carroted.glitch.me/pylon-pixel-2/alpha/feedback.html" />
+<meta name="description" content="For PP2AP members" />
+<meta property="og:title" content="Pylon Pixel 2 Alpha Program Feedback" />
+<meta property="og:url" content="https://carroted.glitch.me/pylon-pixel-2/alpha/feedback.html" />
+<meta property="og:description" content="For PP2AP members" />
+
+
+<meta property="og:image"
+    content="https://cdn.glitch.global/d8a67d05-9666-4c27-b92c-98fd552701fd/Carroted%20Icon.ico?v=1647992663430" />
+<meta name="theme-color" content="#ff7e2c">
+
+
+<head>
+    <link rel="icon"
+        href="/media/icon.svg">
+    <title>Pylon Pixel 2 Alpha Program Feedback</title>
+    <script src="/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<style>
+    .formBox {
+        margin-left: 25%;
+        margin-right: 25%;
+
+        background-color: #0a0d16;
+        border-radius: 10px;
+    box-shadow: 0px 5px 8px #00000050;
+    border: #04050a solid 2px;
+    padding: 30px;
+    padding-top:15px;
+    padding-bottom:15px;
+transform:translate(0,15px);
+    }
+
+    .formBoxContainer{
+        display:flex;
+        left:0;
+        right:0;
+        top:0;
+        bottom:0;
+        position:absolute;
+        align-items: center;
+        vertical-align: middle;
+        justify-content: center;
+    }
+
+    @media screen and (max-width: 1000px) {
+        .formBox {
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+    }
+
+    body {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    :root {
+        padding: 0px;
+    }
+</style>
+
+<body>
+
+    <div id="header"></div>
+    <div id="footer"></div>
+  <div>
+      <br><br><br><br>
+  </div>
+    <script>
+        $(function () {
+            $("#header").load("/header.html");
+            $("#footer").load("/footer.html");
+        });
+    </script>
+
+    
+
+    <!-- fixed progress bar at top of screen -->
+    <div class="progress"
+        style="width:100%; height:5px; background-color:#b2b8d6; display:fixed; top:0px; margin: -10px; padding:0px;">
+        <div class="progress-bar" role="progressbar" style="width:1%; height:5px; background-color:#ff7e2c;"></div>
+    </div>
+     
+    <div class="formBoxContainer">
+
+    <div class="formBox">
+<h1 style="font-size:30px">
+  Pylon Pixel 2 Alpha Program Feedback
+      </h1>
+     <div style="margin-bottom:5px;">
+      
+      </div>
+
+        <span id="questionNumber">1.</span><br><span style="font-size: 24px; margin-bottom:10px; display:inline-block"
+            id="title">What's your name?</span>
+        <span style="font-size: 20px; color:#b2b8d690;"><br><span id="description">Using the same name as your Discord
+                username helps</span></span><br>
+        <input type="text" class="inputfield" id="answerField" autofill="off"
+            onkeydown="if (event.keyCode == 13) { nextQuestion(); return false; }" placeholder="Name"
+            style="width:100%; height:40px; font-size:20px; margin-top:10px; margin-bottom:10px;">
+
+
+        <button class="button" id="nextButton" onclick="nextQuestion();">
+            Next
+        </button><span id="pressEnter"> Press Enter</span>
+
+
+    </div>
+
+</div>
+
+    <script>
+        var downloadButton = ` <button class="button" id="nextButton" onclick="downloadAnswers();" style="padding-left:8px; padding-right: 17px; vertical-align: middle; text-align:center; display: inline-flex; align-items: center; font-size:16px; margin-top:10px">
+     <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="38px" viewBox="0 0 24 24" width="38px" fill="#FFFFFF"><g><rect fill="none" height="24" width="24"/></g><g><path d="M16.59,9H15V4c0-0.55-0.45-1-1-1h-4C9.45,3,9,3.45,9,4v5H7.41c-0.89,0-1.34,1.08-0.71,1.71l4.59,4.59 c0.39,0.39,1.02,0.39,1.41,0l4.59-4.59C17.92,10.08,17.48,9,16.59,9z M5,19c0,0.55,0.45,1,1,1h12c0.55,0,1-0.45,1-1s-0.45-1-1-1H6 C5.45,18,5,18.45,5,19z"/></g></svg>
+  Download your feedback
+  </button>`;
+        function copyToClipboard(str) {
+            const el = document.createElement('textarea');
+            el.value = str;
+            el.setAttribute('readonly', '');
+            el.style.position = 'absolute';
+            el.style.left = '-9999px';
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+        };
+
+
+
+        var answers = [];
+        var question = 0;
+
+        function nextQuestion() {
+            if ($("#answerField").val().trim() == "" && questions[question].required) {
+                return;
+            }
+
+            var answer = "N/A";
+            if (question < questions.length - 1) {
+                question++;
+                $("#title").html(questions[question].title);
+                $("#description").html(questions[question].description);
+                $("#answerField").attr("placeholder", questions[question].placeholder);
+                $("#questionNumber").html((question + 1).toString() + '.');
+
+
+                answer = $("#answerField").val().trim();
+
+                // Clear the previous feedback
+                $("#answerField").val("");
+
+
+
+                // Update the progress bar width
+                var percentage = (question) / questions.length;
+                $(".progress-bar").css("width", (percentage * 100) + "%");
+
+                // Update the answer field type
+                $("#answerField").attr("type", questions[question].type);
+
+                if (questions[question].type == "number") {
+                    // Add onkeypress="preventNonNumericalInput(event)" to the input field
+                    $("#answerField").attr("onkeypress", "preventNonNumericalInput(event)");
+
+                    // Add a max of 10 to the input field and a min of 1
+                    $("#answerField").attr("max", "10");
+                    $("#answerField").attr("min", "1");
+                }
+                else {
+                    // Remove onkeypress="preventNonNumericalInput(event)" from the input field if it exists
+                    $("#answerField").removeAttr("onkeypress");
+
+                    // Remove max and min from the input field if they exist
+                    $("#answerField").removeAttr("max");
+                    $("#answerField").removeAttr("min");
+                }
+
+
+
+            }
+            else {
+                answer = $("#answerField").val().trim();
+
+
+
+
+
+
+
+                $("#title").html("Thank you for your feedback!");
+                $("#description").html("Please click the button below to download your feedback file, and then send it in the feedback channel of the Pylon Pixel 2 Alpha category of the Pylon Pixel Discord server.");
+                // Replace the button with the download button
+                $("#nextButton").replaceWith(downloadButton);
+
+                // Select the download button
+                $("#nextButton").focus();
+                // Remove the input field
+                $("#answerField").remove();
+
+                // Remove the question number
+                $("#questionNumber").remove();
+
+                // Update the progress bar width
+                $(".progress-bar").css("width", "100%");
+
+                // Remove the pressEnter element
+                $("#pressEnter").remove();
+            }
+
+            if (answer == "") {
+                answer = "None";
+            }
+            console.log(answer);
+
+            // Add answer to answers array
+            answers.push(answer);
+
+        }
+        function preventNonNumericalInput(e) {
+            e = e || window.event;
+            var charCode = (typeof e.which == "undefined") ? e.keyCode : e.which;
+            var charStr = String.fromCharCode(charCode);
+
+            if (!charStr.match(/^[0-9]+$/))
+                e.preventDefault();
+        }
+
+        function downloadAnswers() {
+            // Download a JSON file of the answers array
+            var jsonObj = Object.assign({}, answers);
+
+            var json = JSON.stringify(jsonObj);
+
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(json));
+            element.setAttribute('download', "feedback.json");
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+
+    </script>
+
+
+    <br><br>
+
+
+</body>
+
+</html>

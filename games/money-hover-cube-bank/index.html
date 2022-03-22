@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    .tile {
+        width: 80px;
+        height: 80px;
+        background-color: #1FBA4E;
+        border-radius: 0px;
+        margin: 0px;
+        padding: 0px;
+        transition: 10s;
+        border: none;
+        outline: none;
+
+    }
+
+    .tile:hover {
+        background-color: #0081d3;
+        border-radius: 40px;
+        outline: none;
+        transition: 0s;
+
+    }
+
+    .tile:active {
+        background-color: #0081d3;
+        border-radius: 50%;
+        transform: rotate(180deg);
+        outline: none;
+        transition: 1s;
+    }
+
+    .bomb {
+        width: 80px;
+        height: 80px;
+        background-color: #000000;
+        border-radius: 0px;
+        margin: 0px;
+        padding: 0px;
+        transition: 10s;
+        border: none;
+        outline: none;
+
+    }
+
+    .bomb:hover {
+        background-color: #ff7e2c;
+        border-radius: 40px;
+        width: 120px;
+        height: 120px;
+        outline: none;
+        transition: 0s;
+
+    }
+
+    .bomb:active {
+        background-color: #ff7e2c;
+        border-radius: 50%;
+        transform: rotate(180deg);
+        width: 500px;
+        height: 500px;
+        outline: none;
+        transition: 1s;
+    }
+
+    #divs {
+        font-size: 0;
+    }
+</style>
+
+
+<!-- Meta tags for SEO and social sharing -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="all" />
+
+
+<meta name="description" content="money hover cube bank" />
+<meta property="og:title" content="money hover cube bank" />
+<meta property="og:description"
+    content="money hover cube bank" />
+
+<meta property="og:image"
+    content="https://cdn.glitch.global/d8a67d05-9666-4c27-b92c-98fd552701fd/Carroted%20Icon.ico?v=1647992663430" />
+<meta name="theme-color" content="#ff7e2c">
+
+
+<head>
+    <link rel="icon"
+        href="/media/icon.svg">
+    <title>money hover cube bank</title>
+    <script src="/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+
+<body>
+
+    <div id="header"></div>
+    <div id="footer"></div>
+  <div>
+      <br><br><br><br>
+  </div>
+    <script>
+        $(function () {
+            $("#header").load("/header.html");
+            $("#footer").load("/footer.html");
+        });
+      
+      alert("Disclaimer: This game is a joke, and shouldn't be taken seriously.\n\nIf you want to play, please note that it doesn't work on mobile. Instructions are available if you scroll down.")
+    </script>
+
+  <div class="card">
+    <h1>
+      Money Hover Cube Bank
+    </h1>
+  </div>
+
+    <div class="card">
+        <div id="divs"></div>
+    </div>
+    <div class="card">
+        <span id="amountText" style="font-size:80px; color:rgb(255,255,255)"></span><br><br><span
+            id="stats">Loading...</span><br>
+        <br>
+        <hr class="solid"><br>
+        You are now in a field with money cubes (don't ask).<br><br>The local bank has given you a loan
+        of 100$.<br><br>
+        When you hover over a money cube, it turns into a blue sphere, gives you 80$ (I don't make the rules (actually I
+        kinda do)) and shrinks.<br><br>The smaller a cube/sphere, the
+        less money it gives, so try to hover on the bigger and greener ones.<br><br>Also, the bank has interest, and
+        your
+        money
+        lowers constantly.<br><br>Be careful not to hover over bombs (black squares, they explode and cost you TONS of
+        money)<br><br>That's about it, try not to go in debt or you die for some reason. Have fun.<br><br>- Random guy
+        on
+        the street<br><br><br>CTRL+R or F5 to restart
+    </div>
+
+
+    <script>
+        function copyToClipboard(str) {
+            const el = document.createElement('textarea');
+            el.value = str;
+            el.setAttribute('readonly', '');
+            el.style.position = 'absolute';
+            el.style.left = '-9999px';
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+        };
+
+
+        function addDivs(number) {
+            var divy = `<button class="tile"></button>`;
+            var divya = `<button class="bomb"></button>`;
+            for (var i = 0; i < number; i++) {
+                // var chance is a bool with a 1 in 20 chance of being false
+                var chance = Math.random() > 0.05;
+
+                if (chance) {
+                    $("#divs").append(divy);
+                }
+                else {
+                    $("#divs").append(divya);
+                }
+            }
+        }
+        addDivs(100);
+
+        var amount = 100;
+        var go = false;
+        var gameOver = false;
+
+        var tiles = 0;
+        $('.tile').hover(function () {
+            if (gameOver) {
+                return;
+            }
+            tiles++;
+            go = true;
+            var a = Math.random() * 50;
+            var currentWidth = $(this).width();
+            var currentHeight = $(this).height();
+
+            $(this).css('width', a + 'px');
+            $(this).css('height', a + 'px');
+
+            var amountToAdd = Math.floor((currentHeight + currentWidth) * 0.5);
+            amount += amountToAdd;
+            console.log(amountToAdd);
+            $("#amountText").html(amount + '$');
+            // Set amountText color to the green used on tiles
+            $("#amountText").css('color', '#1FBA4E');
+
+            // One in 1500 chance
+            var chance = Math.random() < 0.0015;
+            if (chance == true) {
+                alert("Have a break :)\npress enter or OK when you're feeling OK to continue :D")
+            }
+
+        }, function () {
+            $(this).css('width', '80px');
+            $(this).css('height', '80px');
+        });
+
+        var bombs = 0;
+        $('.bomb').hover(function () {
+            if (gameOver) {
+                return;
+            }
+            bombs++;
+            go = true;
+            // remove amount from 500 to 2500
+            var amountToRemove = Math.floor(Math.random() * 2500) + 500;
+            amount -= amountToRemove;
+            $("#amountText").html(amount + '$');
+
+            // Set amountText color to red
+            $("#amountText").css('color', 'rgb(206, 73, 77)');
+            // Set amountText font size to 120px
+            $("#amountText").css('font-size', '150px');
+        }, function () {
+
+        });
+
+        var fi = 10;
+
+
+        // credit to demonixis
+        Math.lerp = function (value1, value2, amountO) {
+            var amount = amountO * 0.5;
+            amount = amount < 0 ? 0 : amount;
+            amount = amount > 1 ? 1 : amount;
+            return value1 + (value2 - value1) * amount;
+        };
+        function lessOfIt() {
+            if (go && !gameOver) {
+                amount -= fi;
+            }
+            if (amount <= 0) {
+                amount = 0;
+                $("#amountText").html(`Game Over`);
+                $("#amountText").css('color', 'rgb(206, 73, 77)');
+
+                gameOver = true;
+
+            }
+            else {
+                $("#amountText").html(amount + "$");
+            }
+
+
+            $("#stats").html(`<b>Tile hovers: ${tiles}<br>Bomb hovers: ${bombs}</b>`);
+
+
+            // Lerp the amountText font size to 80 and color to the default
+            var currentFontSize = $("#amountText").css("font-size");
+            var currentColor = $("#amountText").css("color");
+            var targetColor = "rgb(173,182,214)";
+            var targetFontSize = "80px";
+
+            var currentFontSizeNum = parseInt(currentFontSize.substring(0, currentFontSize.length - 2));
+            var targetFontSizeNum = parseInt(targetFontSize.substring(0, targetFontSize.length - 2));
+
+            // Lerp the font size
+            var fontSize = Math.lerp(currentFontSizeNum, targetFontSizeNum, 0.1);
+            $("#amountText").css("font-size", fontSize + "px");
+
+            // Get individual rgb values
+            var currentR = parseInt(currentColor.substring(4, currentColor.length - 1));
+            var currentG = parseInt(currentColor.substring(currentColor.indexOf(",") + 1, currentColor.lastIndexOf(",")));
+            var currentB = parseInt(currentColor.substring(currentColor.lastIndexOf(",") + 1, currentColor.length - 1));
+            var targetR = parseInt(targetColor.substring(4, targetColor.length - 1));
+            var targetG = parseInt(targetColor.substring(targetColor.indexOf(",") + 1, targetColor.lastIndexOf(",")));
+            var targetB = parseInt(targetColor.substring(targetColor.lastIndexOf(",") + 1, targetColor.length - 1));
+
+            var r = Math.lerp(currentR, targetR, 0.1);
+            var g = Math.lerp(currentG, targetG, 0.1);
+            var b = Math.lerp(currentB, targetB, 0.1);
+
+            $("#amountText").css("color", "rgb(" + r + "," + g + "," + b + ")");
+
+        }
+
+        setInterval(lessOfIt, fi);
+
+    </script>
+
+
+    <br><br>
+
+
+</body>
+
+</html>

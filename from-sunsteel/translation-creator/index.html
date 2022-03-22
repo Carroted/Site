@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+
+    
+
+    .inputfield {
+        background-color: #2c3042;
+        /* Green */
+        border: none;
+        color: white;
+
+        padding: 4px 9px;
+        text-align: left;
+        text-decoration: none;
+        display: inline-block;
+        font-family: Lexend;
+        font-size: 14px;
+        margin: 4px 2px;
+    }
+
+    ::placeholder {
+        color: #535663;
+    }
+
+    progress {
+        display: inline-block;
+        width: 100%;
+        background-color: #0c0e14;
+        color: #47a14a;
+    }
+
+    progress::-moz-progress-bar {
+        background-color: #47a14a;
+    }
+
+    progress::-webkit-progress-bar {
+        background-color: #0c0e14;
+    }
+
+    progress::-webkit-progress-value {
+        background-color: #47a14a !important;
+    }
+
+    progress[value]::-webkit-progress-bar {
+        background-color: #0c0e14;
+    }
+
+    progress[value] {
+        -webkit-appearance: none;
+    }
+
+    progress[value]::-webkit-progress-value {
+        background-color: #47a14a;
+    }
+
+    a:link {
+        color: #5295e3;
+    }
+
+    a:visited {
+        color: #5295e3;
+
+    }
+
+    a:hover {
+        color: #555dd9;
+        background-color: transparent;
+        text-decoration: underline;
+    }
+
+    a:active {
+        color: #2c2b7a;
+        background-color: transparent;
+        text-decoration: underline;
+    }
+  
+  
+  
+  .inputfield
+  {
+    width: 100%;
+  }
+
+    @media only screen and (min-width: 760px) {
+      .inputfield
+      {
+        
+        width: 500px;
+      }
+      progress
+      {
+        width: 300px;
+      
+      }
+  }
+</style>
+<!-- Meta tags for SEO and social sharing -->
+<link rel="canonical" href="https://carroted.glitch.me/from-sunsteel/translation-creator/" />
+<meta name="description" content="This tool helps you translate From Sunsteel into your language." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="robots" content="index,follow" />
+<meta property="og:title" content="From Sunsteel Translation Creator Tool" />
+<meta property="og:url" content="https://carroted.glitch.me/from-sunsteel/translation-creator/" />
+<meta property="og:description" content="This tool helps you translate From Sunsteel into your language." />
+<meta property="og:image"
+    content="https://cdn.glitch.global/d8a67d05-9666-4c27-b92c-98fd552701fd/Carroted%20Icon.ico?v=1647992663430" />
+<meta name="theme-color" content="#ff7e2c">
+
+
+<head>
+    <link rel="icon"
+        href="/media/icon.svg">
+    <title>From Sunsteel Translation Creator Tool</title>
+    <script src="/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+
+<body>
+
+    <div id="header"></div>
+    <div id="footer"></div>
+  <div>
+      <br><br><br><br>
+  </div>
+    <script>
+        $(function () {
+            $("#header").load("/header.html");
+            $("#footer").load("/footer.html");
+        });
+    </script>
+
+
+  
+
+    <!-- don't translate anything before the game is ready for it, or you'll be wasting your time! -->
+    <h2>From Sunsteel Translation Creator Tool <span style="font-size: 15px;">v1.0.0 by <a
+                href="https://github.com/Alex-Sour" target="_blank">Alex_Sour</a></span></h2><span
+        style="font-size:5px"><br><br></span><span style="word-wrap:break-word;">
+    This tool will help you translate the game into your language. Before beginning, please note the language code of
+    the language you
+    are translating to, which you can find on <a href="http://www.lingoes.net/en/translator/langcode.htm"
+        target="_blank">http://www.lingoes.net/en/translator/langcode.htm</a>
+    (be sure to pick the right one!)</span><br><br>
+    Simply type the text shown below in the field, but in your language, and hit enter. Repeat this until you have
+    translated all the text. (There's a progress bar and a counter at the bottom, so you'll know how much you have
+    left!)<br><br>
+    Thank you for your help! If you choose to publish your translation, and it gets accepted, you will be credited! (if
+    you want)<br><br>Submissions will be denied if they are troll submissions, filled with gibberish/spam, or simply if
+    the translations seem to be mostly incorrect.<br><br><b>This tool is for creating NEW translations. To update
+        existing translations, please use the <a href="/from-sunsteel/translation-updater/">Translation Updater
+            Tool</a>.</b><br><br>
+    <p id="currentLine"
+        style="border-style:solid; border-radius: 5px; border-width: 2px; padding:5px; border-color: #535663;">
+        Loading...</p>
+    <!-- input field for translations-->
+    <input class="inputfield" type="text" id="translate" placeholder="Translate the text above"
+        onkeydown="if (event.keyCode == 13) { submit(); return false; }" /><br><br>
+    <!-- progress bar (with id of progress) -->
+    <progress id="progress" max="100" value="0"></progress>
+    <div id="progressText" style="display: inline-block;">Loading...</div>
+  
+
+ 
+    <script>
+        /*
+        * FileSaver.js
+        * A saveAs() FileSaver implementation.
+        *
+        * By Eli Grey, http://eligrey.com
+        *
+        * License : https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md (MIT)
+        * source  : http://purl.eligrey.com/github/FileSaver.js
+        */
+
+        // The one and only way of getting global scope in all environments
+        // https://stackoverflow.com/q/3277182/1008999
+        var _global = typeof window === 'object' && window.window === window
+            ? window : typeof self === 'object' && self.self === self
+                ? self : typeof global === 'object' && global.global === global
+                    ? global
+                    : this
+
+        function bom(blob, opts) {
+            if (typeof opts === 'undefined') opts = { autoBom: false }
+            else if (typeof opts !== 'object') {
+                console.warn('Deprecated: Expected third argument to be a object')
+                opts = { autoBom: !opts }
+            }
+
+            // prepend BOM for UTF-8 XML and text/* types (including HTML)
+            // note: your browser will automatically convert UTF-16 U+FEFF to EF BB BF
+            if (opts.autoBom && /^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(blob.type)) {
+                return new Blob([String.fromCharCode(0xFEFF), blob], { type: blob.type })
+            }
+            return blob
+        }
+
+        function download(url, name, opts) {
+            var xhr = new XMLHttpRequest()
+            xhr.open('GET', url)
+            xhr.responseType = 'blob'
+            xhr.onload = function () {
+                saveAs(xhr.response, name, opts)
+            }
+            xhr.onerror = function () {
+                console.error('could not download file')
+            }
+            xhr.send()
+        }
+
+        function corsEnabled(url) {
+            var xhr = new XMLHttpRequest()
+            // use sync to avoid popup blocker
+            xhr.open('HEAD', url, false)
+            try {
+                xhr.send()
+            } catch (e) { }
+            return xhr.status >= 200 && xhr.status <= 299
+        }
+
+        // `a.click()` doesn't work for all browsers (#465)
+        function click(node) {
+            try {
+                node.dispatchEvent(new MouseEvent('click'))
+            } catch (e) {
+                var evt = document.createEvent('MouseEvents')
+                evt.initMouseEvent('click', true, true, window, 0, 0, 0, 80,
+                    20, false, false, false, false, 0, null)
+                node.dispatchEvent(evt)
+            }
+        }
+
+        // Detect WebView inside a native macOS app by ruling out all browsers
+        // We just need to check for 'Safari' because all other browsers (besides Firefox) include that too
+        // https://www.whatismybrowser.com/guides/the-latest-user-agent/macos
+        var isMacOSWebView = _global.navigator && /Macintosh/.test(navigator.userAgent) && /AppleWebKit/.test(navigator.userAgent) && !/Safari/.test(navigator.userAgent)
+
+        var saveAs = _global.saveAs || (
+            // probably in some web worker
+            (typeof window !== 'object' || window !== _global)
+                ? function saveAs() { /* noop */ }
+
+                // Use download attribute first if possible (#193 Lumia mobile) unless this is a macOS WebView
+                : ('download' in HTMLAnchorElement.prototype && !isMacOSWebView)
+                    ? function saveAs(blob, name, opts) {
+                        var URL = _global.URL || _global.webkitURL
+                        var a = document.createElement('a')
+                        name = name || blob.name || 'download'
+
+                        a.download = name
+                        a.rel = 'noopener' // tabnabbing
+
+                        // TODO: detect chrome extensions & packaged apps
+                        // a.target = '_blank'
+
+                        if (typeof blob === 'string') {
+                            // Support regular links
+                            a.href = blob
+                            if (a.origin !== location.origin) {
+                                corsEnabled(a.href)
+                                    ? download(blob, name, opts)
+                                    : click(a, a.target = '_blank')
+                            } else {
+                                click(a)
+                            }
+                        } else {
+                            // Support blobs
+                            a.href = URL.createObjectURL(blob)
+                            setTimeout(function () { URL.revokeObjectURL(a.href) }, 4E4) // 40s
+                            setTimeout(function () { click(a) }, 0)
+                        }
+                    }
+
+                    // Use msSaveOrOpenBlob as a second approach
+                    : 'msSaveOrOpenBlob' in navigator
+                        ? function saveAs(blob, name, opts) {
+                            name = name || blob.name || 'download'
+
+                            if (typeof blob === 'string') {
+                                if (corsEnabled(blob)) {
+                                    download(blob, name, opts)
+                                } else {
+                                    var a = document.createElement('a')
+                                    a.href = blob
+                                    a.target = '_blank'
+                                    setTimeout(function () { click(a) })
+                                }
+                            } else {
+                                navigator.msSaveOrOpenBlob(bom(blob, opts), name)
+                            }
+                        }
+
+                        // Fallback to using FileReader and a popup
+                        : function saveAs(blob, name, opts, popup) {
+                            // Open a popup immediately do go around popup blocker
+                            // Mostly only available on user interaction and the fileReader is async so...
+                            popup = popup || open('', '_blank')
+                            if (popup) {
+                                popup.document.title =
+                                    popup.document.body.innerText = 'downloading...'
+                            }
+
+                            if (typeof blob === 'string') return download(blob, name, opts)
+
+                            var force = blob.type === 'application/octet-stream'
+                            var isSafari = /constructor/i.test(_global.HTMLElement) || _global.safari
+                            var isChromeIOS = /CriOS\/[\d]+/.test(navigator.userAgent)
+
+                            if ((isChromeIOS || (force && isSafari) || isMacOSWebView) && typeof FileReader !== 'undefined') {
+                                // Safari doesn't allow downloading of blob URLs
+                                var reader = new FileReader()
+                                reader.onloadend = function () {
+                                    var url = reader.result
+                                    url = isChromeIOS ? url : url.replace(/^data:[^;]*;/, 'data:attachment/file;')
+                                    if (popup) popup.location.href = url
+                                    else location = url
+                                    popup = null // reverse-tabnabbing #460
+                                }
+                                reader.readAsDataURL(blob)
+                            } else {
+                                var URL = _global.URL || _global.webkitURL
+                                var url = URL.createObjectURL(blob)
+                                if (popup) popup.location = url
+                                else location.href = url
+                                popup = null // reverse-tabnabbing #460
+                                setTimeout(function () { URL.revokeObjectURL(url) }, 4E4) // 40s
+                            }
+                        }
+        )
+
+        _global.saveAs = saveAs.saveAs = saveAs
+
+        if (typeof module !== 'undefined') {
+            module.exports = saveAs;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        var file = `# Hey! If you're translating From Sunsteel, don't change the text before the equal signs! Those are important so the game knows what's what. Also, you can replace this line with credits if you want! Example: "Translated by Joe" -Alex_Sour
+
+
+
+game.name=From Sunsteel
+game.credit=Developed by Carroted
+
+info.anyKey=Press any key to continue.
+info.invalidGo=You can't go {0} from here.
+info.invalidDirection=Unknown direction. Type 'help' to get started.
+info.namePrompt=Please enter your name
+
+intro.1=The year is 2. Duscolia's many tribes have turned upon each other in a bloody struggle for the planet's remaining supplies of Sunsteel, an incredibly precious metal. Your tribe recently left for the Sunsteel Hills, a proclaimed eden housing the last supplies of Sunsteel.
+intro.2=However, you abandoned them in a bid to seek adventure across Duscolia..
+intro.3=You wake up next to small crag, sat on a patch of brush on the forest floor.
+intro.4=What do you want to do? (enter 'help' to get started)
+
+locations.gameStart=You are surrounded by lush, green forest. To your left a small track leads into the brush, and forward there is a steep incline into the forest-covered mountains. There is a structure poking out of the canopy, but you can't quite make it out.
+locations.unknown=You are in an unknown location. Please file a bug report at https://github.com/Carroted/From-Sunsteel/issues/new
+
+commands.go.syntax=go [direction]
+commands.go=go
+commands.go.description=Move in a direction (left, right, forward or backward)
+commands.help=help
+commands.help.syntax=help
+commands.help.description=View a list of commands
+commands.survey=survey
+commands.survey.syntax=survey
+commands.survey.description=Survey the area you are in
+commands.chant=kahla akt tor
+commands.unknown=Unknown command. Type 'help' to get started.
+
+directions.forward=forward
+directions.left=left
+directions.right=right
+directions.backward=backward`;
+
+        // Split into lines, remove empty lines and lines that start with #
+        var lines = file.split("\n").filter(function (line) {
+            return line.trim() != "" && line.charAt(0) != "#";
+        });
+        var currentLine = 0;
+
+        var yourLines = []; // lines you've translated
+
+        // set the currentLine to the next line's value (after the equal sign)
+        document.getElementById("currentLine").innerHTML =
+            lines[currentLine].split("=")[1];
+        // clear the input field
+        document.getElementById("translate").value = "";
+        // update the progress bar
+        document.getElementById("progress").value = currentLine;
+        document.getElementById("progress").max = lines.length;
+
+        // update the progress text
+        document.getElementById("progressText").innerHTML =
+            currentLine + "/" + lines.length;
+
+        function done() {
+            var yourName = prompt("What is your name? (To credit you in the file. If you don't want credit, leave this empty.)");
+            var credit;
+            var languageCode = prompt("What is the language code of the language you're translating to? (e.g. en-US) Here's a list of language codes: http://www.lingoes.net/en/translator/langcode.htm (be sure to pick the right one!)");
+            var credit2 = "this.translators=";
+
+            if (yourName == null) {
+                credit = "# Translated by an anonymous person.";
+                credit2 = "";
+            }
+            else if (yourName.trim() == "") {
+                credit = "# Translated by an anonymous person.";
+                credit2 = "";
+            }
+            else {
+                credit = "# Translated by " + yourName.trim() + ".";
+                credit2 += yourName.trim();
+            }
+
+            if (languageCode == null) {
+                languageCode = "an unknown language";
+            }
+            else if (languageCode.trim() == "") {
+                languageCode = "an unknown language";
+            }
+
+            // add the credit to the top of the new file
+            var newFile = credit + "\n\n" + yourLines.join("\n") + "\n\n# This file is in " + languageCode + ", and is a translation for From Sunsteel.\n" + credit2;
+
+            // save the file
+            var blob = new Blob([newFile], { type: "text/plain;charset=utf-8" });
+            saveAs(blob, languageCode + ".txt");
+
+            // Remove the input field and replace the currentLine text with "Done! Send the file to Alex_Sour#8061 on Discord or add a GitHub pull request with the file!"
+            document.getElementById("translate").remove();
+            document.getElementById("currentLine").innerHTML = "Done! Send the file to Dusco_11#5454 on Discord, Alex_Sour#8061 on Discord or add a GitHub pull request with the file!";
+        }
+
+        // when someone submits the input field, this function is called
+        function submit() {
+            if (currentLine >= lines.length) {
+                done();
+                return;
+            }
+
+            // get the value of the input field
+            var input = document.getElementById("translate").value;
+            // if the input is empty, do nothing
+            if (input == "") {
+                return;
+            }
+
+            currentLine++;
+
+            // set the currentLine to the next line's value (after the equal sign)
+            if (currentLine < lines.length) {
+                document.getElementById("currentLine").innerHTML =
+                    lines[currentLine].split("=")[1];
+            }
+            // clear the input field
+            document.getElementById("translate").value = "";
+            // add the input and what was before the line's equal sign to yourLines
+            if (currentLine <= lines.length) {
+                yourLines.push(lines[currentLine - 1].split("=")[0] + "=" + input);
+            }
+
+            // update the progress bar
+            document.getElementById("progress").value = currentLine;
+            document.getElementById("progress").max = lines.length;
+
+            // update the progress text
+            document.getElementById("progressText").innerHTML =
+                currentLine + "/" + lines.length;
+
+            // if we've reached the end of the file, alert("no more lines") for now (later, we'll export a new file similar to the old one but with the new lines)
+            if (currentLine >= lines.length) {
+                done();
+                return;
+            }
+        }
+    </script>
+</body>
+
+</html>

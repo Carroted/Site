@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    
+</style>
+
+
+<!-- Meta tags for SEO and social sharing -->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="all" />
+  
+  
+  <link rel="canonical" href="https://carroted.glitch.me/developer/docs" />
+<meta name="description" content="The Carroted Developer Documentation home." />
+<meta property="og:title" content="Carroted | Developer Documentation" />
+  <meta property="og:url" content="https://carroted.glitch.me/developer/docs" />
+<meta property="og:description" content="The Carroted Developer Documentation home." />
+
+
+<meta property="og:image"
+    content="https://cdn.glitch.global/d8a67d05-9666-4c27-b92c-98fd552701fd/Carroted%20Icon.ico?v=1647992663430" />
+<meta name="theme-color" content="#ff7e2c">
+
+
+<head>
+    <link rel="icon"
+        href="/media/icon.svg">
+    <title>Carroted | Developer Documentation</title>
+    <script src="/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+
+<body>
+
+    <div id="header"></div>
+    <div id="footer"></div>
+  <div>
+      <br><br><br><br>
+  </div>
+    <script>
+        $(function () {
+            $("#header").load("/header.html");
+            $("#footer").load("/footer.html");
+        });
+    </script>
+
+    <div class="cardBox">
+
+
+        <div class="card">
+
+
+            <h1>
+                Documentation Home
+            </h1>
+          
+            Lorem ipsum dolor sit amet. This page is a template for new pages on the Carroted site.
+    </div>
+  </div>
+
+
+    <script>
+        function copyToClipboard(str) {
+            const el = document.createElement('textarea');
+            el.value = str;
+            el.setAttribute('readonly', '');
+            el.style.position = 'absolute';
+            el.style.left = '-9999px';
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+        };
+    </script>
+<br><br>
+   
+
+</body>
+
+</html>

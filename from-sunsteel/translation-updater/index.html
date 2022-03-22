@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+    @font-face {
+        font-family: Lexend;
+        src: url('https://cdn.glitch.com/ffb3280a-a2f8-41cd-8ac5-c2a1ba79b21d%2FLexendDeca-Regular.ttf?v=1625179829318');
+    }
+
+    @font-face {
+        font-family: Digital;
+        src: url('https://cdn.glitch.com/ffb3280a-a2f8-41cd-8ac5-c2a1ba79b21d%2FSegment7Standard.otf?v=1625245029554');
+    }
+
+
+    .button {
+
+        background-color: #47a14a;
+        /* Green */
+        border: none;
+        color: white;
+        padding: 8px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-family: Lexend;
+        font-size: 14px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+
+    .button:hover {
+
+        background-color: #277d2a;
+        /* Green */
+
+    }
+
+    .button:active {
+
+        background-color: #0c590f;
+        /* Green */
+
+    }
+
+    .button2 {
+        background-color: #008CBA;
+    }
+
+    /* Blue https://cdn.glitch.com/ffb3280a-a2f8-41cd-8ac5-c2a1ba79b21d%2Falexsourglitchme2.png?v=1625181440507 */
+    .buttonr {
+        background-color: #CE494D;
+        padding: 8px 10px;
+    }
+
+    /* Red */
+    .buttonb {
+        background-color: #5295e3;
+        padding: 8px 10px;
+    }
+
+    /* Blue */
+    .button4 {
+        background-color: #e7e7e7;
+        color: black;
+    }
+
+    /* Gray */
+    .button5 {
+        background-color: #555555;
+    }
+
+    /* Black */
+    .button6 {
+        padding: 8px 10px;
+    }
+
+    /* Black */
+
+    .buttonr:hover {
+        background-color: #a32a2e;
+
+    }
+
+    .buttonr:active {
+        background-color: #821a1d;
+
+    }
+
+    .buttonb:hover {
+        background-color: #3474bf;
+
+    }
+
+    .buttonb:active {
+        background-color: #2460a6;
+
+    }
+
+    .inputfield {
+        background-color: #2c3042;
+        /* Green */
+        border: none;
+        color: white;
+
+        padding: 4px 9px;
+        text-align: left;
+        text-decoration: none;
+        display: inline-block;
+        font-family: Lexend;
+        font-size: 14px;
+        margin: 4px 2px;
+
+    }
+
+    ::placeholder {
+        color: #535663;
+    }
+
+    progress {
+        display: inline-block;
+        width: 100%;
+        background-color: #0c0e14;
+        color: #47a14a;
+    }
+
+    progress::-moz-progress-bar {
+        background-color: #47a14a;
+    }
+
+    progress::-webkit-progress-bar {
+        background-color: #0c0e14;
+    }
+
+    progress::-webkit-progress-value {
+        background-color: #47a14a !important;
+    }
+
+    progress[value]::-webkit-progress-bar {
+        background-color: #0c0e14;
+    }
+
+    progress[value] {
+        -webkit-appearance: none;
+    }
+
+    progress[value]::-webkit-progress-value {
+        background-color: #47a14a;
+    }
+
+    a:link {
+        color: #5295e3;
+    }
+
+    a:visited {
+        color: #5295e3;
+
+    }
+
+    a:hover {
+        color: #555dd9;
+        background-color: transparent;
+        text-decoration: underline;
+    }
+
+    a:active {
+        color: #2c2b7a;
+        background-color: transparent;
+        text-decoration: underline;
+    }
+
+    /* credit to codingnepal for the file upload box */
+    .drag-area {
+        border: 2px dashed #b2b8d6;
+        height: 250px;
+        width: 100%;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .drag-area.active {
+        border: 2px solid #b2b8d6;
+    }
+
+    .drag-area .icon {
+        font-size: 100px;
+        color: #b2b8d6;
+    }
+
+    .drag-area header {
+        font-size: 30px;
+        font-weight: 500;
+        color: #b2b8d6;
+      text-align: center;
+    }
+
+    .drag-area span {
+        font-size: 25px;
+        font-weight: 500;
+        color: #b2b8d6;
+        margin: 10px 0 15px 0;
+        text-align: center;
+    }
+
+    .drag-area img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+    }
+  
+    .inputfield
+  {
+    width: 100%;
+  }
+
+    @media only screen and (min-width: 760px) {
+      .inputfield
+      {
+        
+        width: 500px;
+      }
+      progress
+      {
+        width: 300px;
+      
+      }
+      
+      .drag-area
+      {
+        width: 700px;
+      
+      }
+  }
+</style>
+<!-- Meta tags for SEO and social sharing -->
+<link rel="canonical" href="https://carroted.glitch.me/from-sunsteel/translation-updater" />
+<meta name="description"
+    content="This tool helps you update From Sunsteel translations to work in newer versions of the game." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<meta name="robots" content="index,follow" />
+<meta property="og:title" content="From Sunsteel Translation Updater Tool" />
+<meta property="og:url" content="https://carroted.glitch.me/from-sunsteel/translation-updater/" />
+<meta property="og:description"
+    content="This tool helps you update From Sunsteel translations to work in newer versions of the game." />
+<meta property="og:image"
+    content="https://cdn.glitch.global/d8a67d05-9666-4c27-b92c-98fd552701fd/Carroted%20Icon.ico?v=1647992663430" />
+<meta name="theme-color" content="#ff7e2c">
+
+
+<head>
+    <link rel="icon"
+        href="/media/icon.svg">
+    <title>From Sunsteel Translation Updater Tool</title>
+    <script src="/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+
+<body>
+
+    <div id="header"></div>
+    <div id="footer"></div>
+  <div>
+      <br><br><br><br>
+  </div>
+    <script>
+        $(function () {
+            $("#header").load("/header.html");
+            $("#footer").load("/footer.html");
+        });
+    </script>
+
+
+    
+
+    <!-- don't translate anything before the game is ready for it, or you'll be wasting your time! -->
+    <h2>From Sunsteel Translation Updater Tool <span style="font-size: 15px;">v1.0.0 by <a
+                href="https://github.com/Alex-Sour" target="_blank">Alex_Sour</a></span></h2><span
+        style="font-size:5px"><br><br></span>
+    This tool will help you update From Sunsteel translations to work in newer versions of the game.<br><br>
+    Simply type the text shown below in the field, but in your language, and hit enter. Repeat this until you have
+    translated all the new text. (There's a progress bar and a counter at the bottom, so you'll know how much you have
+    left!)<br><br>
+    Thank you for your help! If you choose to publish your translation update, and it gets accepted, you will be
+    credited! (if
+    you want, and only if your name isn't already in the translation's credits)<br><br>Submissions will be denied if
+    they are troll submissions, filled with gibberish/spam, or simply if the translations seem to be mostly
+    incorrect.<br><br><b>This tool is for updating EXISTING translations. To create new translations, please use the <a
+            href="/from-sunsteel/translation-creator/">Translation Creator
+            Tool</a>.</b><br><br><br>
+
+    <!-- credit to codingnepal for the file upload box -->
+    <div id="drag-container">
+        <div class="drag-area">
+            <svg xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" height="54px" viewBox="0 0 24 24"
+                width="54px" fill="#b2b8d6">
+                <g>
+                    <rect fill="none" height="24" width="24" />
+                </g>
+                <g>
+                    <path
+                        d="M19.41,7.41l-4.83-4.83C14.21,2.21,13.7,2,13.17,2H6C4.9,2,4.01,2.9,4.01,4L4,20c0,1.1,0.89,2,1.99,2H18c1.1,0,2-0.9,2-2 V8.83C20,8.3,19.79,7.79,19.41,7.41z M14.8,15H13v3c0,0.55-0.45,1-1,1s-1-0.45-1-1v-3H9.21c-0.45,0-0.67-0.54-0.35-0.85l2.8-2.79 c0.2-0.19,0.51-0.19,0.71,0l2.79,2.79C15.46,14.46,15.24,15,14.8,15z M14,9c-0.55,0-1-0.45-1-1V3.5L18.5,9H14z" />
+                </g>
+            </svg>
+            <header>Drag & Drop to Upload File</header>
+            <span>OR</span>
+            <button class="button button">Browse File</button>
+            <input type="file" hidden>
+        </div>
+        <br>
+    </div>
+
+    <div id="input-container" style="display:none;">
+        <p id="currentLine"
+            style="border-style:solid; border-radius: 5px; border-width: 2px; padding:5px; border-color: #535663;">
+            Loading...</p>
+        <!-- input field for translations-->
+        <input class="inputfield" type="text" id="translate" placeholder="Translate the text above"
+            onkeydown="if (event.keyCode == 13) { submit(); return false; }" /><br><br>
+        <!-- progress bar (with id of progress) -->
+        <progress id="progress" max="100" value="0"></progress>
+        <div id="progressText" style="display: inline-block;">Loading...</div>
+    </div>
+
+
+    <script>
+        /*
+        * FileSaver.js
+        * A saveAs() FileSaver implementation.
+        *
+        * By Eli Grey, http://eligrey.com
+        *
+        * License : https://github.com/eligrey/FileSaver.js/blob/master/LICENSE.md (MIT)
+        * source  : http://purl.eligrey.com/github/FileSaver.js
+        */
+
+        // The one and only way of getting global scope in all environments
+        // https://stackoverflow.com/q/3277182/1008999
+        var _global = typeof window === 'object' && window.window === window
+            ? window : typeof self === 'object' && self.self === self
+                ? self : typeof global === 'object' && global.global === global
+                    ? global
+                    : this
+
+        function bom(blob, opts) {
+            if (typeof opts === 'undefined') opts = { autoBom: false }
+            else if (typeof opts !== 'object') {
+                console.warn('Deprecated: Expected third argument to be a object')
+                opts = { autoBom: !opts }
+            }
+
+            // prepend BOM for UTF-8 XML and text/* types (including HTML)
+            // note: your browser will automatically convert UTF-16 U+FEFF to EF BB BF
+            if (opts.autoBom && /^\s*(?:text\/\S*|application\/xml|\S*\/\S*\+xml)\s*;.*charset\s*=\s*utf-8/i.test(blob.type)) {
+                return new Blob([String.fromCharCode(0xFEFF), blob], { type: blob.type })
+            }
+            return blob
+        }
+
+        function download(url, name, opts) {
+            var xhr = new XMLHttpRequest()
+            xhr.open('GET', url)
+            xhr.responseType = 'blob'
+            xhr.onload = function () {
+                saveAs(xhr.response, name, opts)
+            }
+            xhr.onerror = function () {
+                console.error('could not download file')
+            }
+            xhr.send()
+        }
+
+        function corsEnabled(url) {
+            var xhr = new XMLHttpRequest()
+            // use sync to avoid popup blocker
+            xhr.open('HEAD', url, false)
+            try {
+                xhr.send()
+            } catch (e) { }
+            return xhr.status >= 200 && xhr.status <= 299
+        }
+
+        // `a.click()` doesn't work for all browsers (#465)
+        function click(node) {
+            try {
+                node.dispatchEvent(new MouseEvent('click'))
+            } catch (e) {
+                var evt = document.createEvent('MouseEvents')
+                evt.initMouseEvent('click', true, true, window, 0, 0, 0, 80,
+                    20, false, false, false, false, 0, null)
+                node.dispatchEvent(evt)
+            }
+        }
+
+        // Detect WebView inside a native macOS app by ruling out all browsers
+        // We just need to check for 'Safari' because all other browsers (besides Firefox) include that too
+        // https://www.whatismybrowser.com/guides/the-latest-user-agent/macos
+        var isMacOSWebView = _global.navigator && /Macintosh/.test(navigator.userAgent) && /AppleWebKit/.test(navigator.userAgent) && !/Safari/.test(navigator.userAgent)
+
+        var saveAs = _global.saveAs || (
+            // probably in some web worker
+            (typeof window !== 'object' || window !== _global)
+                ? function saveAs() { /* noop */ }
+
+                // Use download attribute first if possible (#193 Lumia mobile) unless this is a macOS WebView
+                : ('download' in HTMLAnchorElement.prototype && !isMacOSWebView)
+                    ? function saveAs(blob, name, opts) {
+                        var URL = _global.URL || _global.webkitURL
+                        var a = document.createElement('a')
+                        name = name || blob.name || 'download'
+
+                        a.download = name
+                        a.rel = 'noopener' // tabnabbing
+
+                        // TODO: detect chrome extensions & packaged apps
+                        // a.target = '_blank'
+
+                        if (typeof blob === 'string') {
+                            // Support regular links
+                            a.href = blob
+                            if (a.origin !== location.origin) {
+                                corsEnabled(a.href)
+                                    ? download(blob, name, opts)
+                                    : click(a, a.target = '_blank')
+                            } else {
+                                click(a)
+                            }
+                        } else {
+                            // Support blobs
+                            a.href = URL.createObjectURL(blob)
+                            setTimeout(function () { URL.revokeObjectURL(a.href) }, 4E4) // 40s
+                            setTimeout(function () { click(a) }, 0)
+                        }
+                    }
+
+                    // Use msSaveOrOpenBlob as a second approach
+                    : 'msSaveOrOpenBlob' in navigator
+                        ? function saveAs(blob, name, opts) {
+                            name = name || blob.name || 'download'
+
+                            if (typeof blob === 'string') {
+                                if (corsEnabled(blob)) {
+                                    download(blob, name, opts)
+                                } else {
+                                    var a = document.createElement('a')
+                                    a.href = blob
+                                    a.target = '_blank'
+                                    setTimeout(function () { click(a) })
+                                }
+                            } else {
+                                navigator.msSaveOrOpenBlob(bom(blob, opts), name)
+                            }
+                        }
+
+                        // Fallback to using FileReader and a popup
+                        : function saveAs(blob, name, opts, popup) {
+                            // Open a popup immediately do go around popup blocker
+                            // Mostly only available on user interaction and the fileReader is async so...
+                            popup = popup || open('', '_blank')
+                            if (popup) {
+                                popup.document.title =
+                                    popup.document.body.innerText = 'downloading...'
+                            }
+
+                            if (typeof blob === 'string') return download(blob, name, opts)
+
+                            var force = blob.type === 'application/octet-stream'
+                            var isSafari = /constructor/i.test(_global.HTMLElement) || _global.safari
+                            var isChromeIOS = /CriOS\/[\d]+/.test(navigator.userAgent)
+
+                            if ((isChromeIOS || (force && isSafari) || isMacOSWebView) && typeof FileReader !== 'undefined') {
+                                // Safari doesn't allow downloading of blob URLs
+                                var reader = new FileReader()
+                                reader.onloadend = function () {
+                                    var url = reader.result
+                                    url = isChromeIOS ? url : url.replace(/^data:[^;]*;/, 'data:attachment/file;')
+                                    if (popup) popup.location.href = url
+                                    else location = url
+                                    popup = null // reverse-tabnabbing #460
+                                }
+                                reader.readAsDataURL(blob)
+                            } else {
+                                var URL = _global.URL || _global.webkitURL
+                                var url = URL.createObjectURL(blob)
+                                if (popup) popup.location = url
+                                else location.href = url
+                                popup = null // reverse-tabnabbing #460
+                                setTimeout(function () { URL.revokeObjectURL(url) }, 4E4) // 40s
+                            }
+                        }
+        )
+
+        _global.saveAs = saveAs.saveAs = saveAs
+
+        if (typeof module !== 'undefined') {
+            module.exports = saveAs;
+        }
+
+
+
+
+
+
+
+        // credit to codingnepal for the file upload box
+
+        //selecting all required elements
+        const dropArea = document.querySelector(".drag-area"),
+            dragText = dropArea.querySelector("header"),
+            dragbutton = dropArea.querySelector("button"),
+            draginput = dropArea.querySelector("input");
+        let dragfile; //this is a global variable and we'll use it inside multiple functions
+
+        dragbutton.onclick = () => {
+            draginput.click(); //if user click on the button then the input also clicked
+        }
+
+        draginput.addEventListener("change", function () {
+            //getting user select file and [0] this means if user select multiple files then we'll select only the first one
+            dragfile = this.files[0];
+            dropArea.classList.add("active");
+            showFile(); //calling function
+        });
+
+
+        //If user Drag File Over DropArea
+        dropArea.addEventListener("dragover", (event) => {
+            event.preventDefault(); //preventing from default behaviour
+            dropArea.classList.add("active");
+            dragText.textContent = "Drop to Upload File";
+        });
+
+        //If user leave dragged File from DropArea
+        dropArea.addEventListener("dragleave", () => {
+            dropArea.classList.remove("active");
+            dragText.textContent = "Drag & Drop to Upload File";
+        });
+
+        //If user drop File on DropArea
+        dropArea.addEventListener("drop", (event) => {
+            event.preventDefault(); //preventing from default behaviour
+            //getting user select file and [0] this means if user select multiple files then we'll select only the first one
+            dragfile = event.dataTransfer.files[0];
+            showFile(); //calling function
+        });
+
+        function showFile() {
+            let fileType = dragfile.type; //getting selected file type
+            let validExtensions = ["text/plain"]; //adding some valid image extensions in array
+            if (validExtensions.includes(fileType)) { //if user selected file is an image file
+                var reader = new FileReader();
+                reader.onload = processFile(dragfile);
+                reader.readAsText(dragfile);
+            } else {
+                alert("This is not a .txt file! Please be sure to upload From Sunsteel translation files.");
+
+                dropArea.classList.remove("active");
+                dragText.textContent = "Drag & Drop to Upload File";
+            }
+        }
+
+        var file = `# Hey! If you're translating From Sunsteel, don't change the text before the equal signs! Those are important so the game knows what's what. Also, you can replace this line with credits if you want! Example: "Translated by Joe" -Alex_Sour
+
+
+
+game.name=From Sunsteel
+game.credit=Developed by Carroted
+
+info.anyKey=Press any key to continue.
+info.invalidGo=You can't go {0} from here.
+info.invalidDirection=Unknown direction. Type 'help' to get started.
+info.namePrompt=Please enter your name
+
+intro.1=The year is 2. Duscolia's many tribes have turned upon each other in a bloody struggle for the planet's remaining supplies of Sunsteel, an incredibly precious metal. Your tribe recently left for the Sunsteel Hills, a proclaimed eden housing the last supplies of Sunsteel.
+intro.2=However, you abandoned them in a bid to seek adventure across Duscolia..
+intro.3=You wake up next to small crag, sat on a patch of brush on the forest floor.
+intro.4=What do you want to do? (enter 'help' to get started)
+
+locations.gameStart=You are surrounded by lush, green forest. To your left a small track leads into the brush, and forward there is a steep incline into the forest-covered mountains. There is a structure poking out of the canopy, but you can't quite make it out.
+locations.unknown=You are in an unknown location. Please file a bug report at https://github.com/Carroted/From-Sunsteel/issues/new
+
+commands.go.syntax=go [direction]
+commands.go=go
+commands.go.description=Move in a direction (left, right, forward or backward)
+commands.help=help
+commands.help.syntax=help
+commands.help.description=View a list of commands
+commands.survey=survey
+commands.survey.syntax=survey
+commands.survey.description=Survey the area you are in
+commands.chant=kahla akt tor
+commands.unknown=Unknown command. Type 'help' to get started.
+
+directions.forward=forward
+directions.left=left
+directions.right=right
+directions.backward=backward`;
+        var newLines; var currentLine; var yourLines; var started = false; var savedFile; var savedFileName;
+        function processFile(theFile) {
+            return function (e) {
+                var info = e.target.result;
+                dragToggler();
+                dragText.textContent = "Drag & Drop to Upload File";
+                dropArea.classList.remove("active");
+                savedFile = info;
+
+
+                // Split into lines, remove empty lines and lines that start with #
+                var lines = info.split("\n").filter(function (line) {
+                    return line.trim() != "" && line.charAt(0) != "#";
+                });
+
+                // Split into lines, remove empty lines and lines that start with #
+                var fileLines = file.split("\n").filter(function (line) {
+                    return line.trim() != "" && line.charAt(0) != "#";
+                });
+
+                // File format has a bunch of lines with an ID, an equals sign, and a value. We want to find IDs that are in the new file the user uploaded, but not in the old file. We will then have the user translate those lines.
+                // Then, we need to get the entire lines from the new file that are not in the old file, not just the ID. To clarify, the values in the original and uploaded files will be different, but the IDs will be the same, which is why we only check for new IDs.
+                newLines = fileLines.filter(function (line) {
+                    return !lines.some(function (oldLine) {
+                        return oldLine.split("=")[0] == line.split("=")[0];
+                    });
+                });
+
+                if(newLines.length > 0)
+                {
+                    savedFileName = e.target.name;
+
+
+currentLine = 0;
+
+yourLines = []; // lines you've translated
+
+// set the currentLine to the next line's value (after the equal sign)
+document.getElementById("currentLine").innerHTML =
+    newLines[currentLine].split("=")[1];
+// clear the input field
+document.getElementById("translate").value = "";
+// update the progress bar
+document.getElementById("progress").value = currentLine;
+document.getElementById("progress").max = newLines.length;
+
+// update the progress text
+document.getElementById("progressText").innerHTML =
+    currentLine + "/" + newLines.length;
+                }
+                else
+                {
+                    alert("No new lines to translate! This file is already up to date.");
+                    dragToggler();
+                }
+                
+            }
+        }
+
+
+
+
+        function dragToggler() {
+            var x = document.getElementById("drag-container");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+
+            var y = document.getElementById("input-container");
+            if (y.style.display === "none") {
+                y.style.display = "block";
+            } else {
+                y.style.display = "none";
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        function done() {
+            var yourName = prompt("What is your name? (To credit you in the file. If you don't want credit, or your name is already in the list of credits in the file, leave this empty.)");
+            var credit;
+            var credit2 = "";
+
+            if (yourName == null) {
+                credit = "";
+                credit2 = "";
+            }
+            else if (yourName.trim() == "") {
+                credit = "";
+                credit2 = "";
+            }
+            else {
+                credit = "# Translation updated by " + yourName.trim() + ".";
+                credit2 += "," + yourName.trim();
+            }
+
+            // Find the credits line in the original file if it exists (IT ISN'T ALWAYS THERE, IF IT ISN'T, WE NEED TO ADD IT)
+            var creditsOriginal = savedFile.split("\n").filter(function (line) {
+                return line.trim().startsWith("this.translators=");
+            });
+
+            // add the credit to the top of the new file
+            var newFile = savedFile + "\n\n" + credit + "\n\n" + yourLines.join("\n");
+
+            // If the credits line exists, and the name isn't already in the list, add the name to the list. If credit2 is empty, we don't need to do anything.
+            if (creditsOriginal.length > 0 && credit2 != "") {
+                var credits = creditsOriginal[0].split("=")[1];
+                if (!credits.includes(credit2.substring(1))) {
+                    newFile = newFile.replace(creditsOriginal[0], "this.translators=" + credits + credit2);
+                }
+            }
+            else if (creditsOriginal.length == 0 && credit2 != "") {
+                newFile += "\nthis.translators=" + credit2;
+            }
+
+
+
+            // save the file
+            var blob = new Blob([newFile], { type: "text/plain;charset=utf-8" });
+            saveAs(blob, savedFileName);
+
+            // Remove the input field and replace the currentLine text with "Done! Send the file to Alex_Sour#8061 on Discord or add a GitHub pull request with the file!"
+            document.getElementById("translate").remove();
+            document.getElementById("currentLine").innerHTML = "Done! Send the file to Alex_Sour#8061 on Discord or add a GitHub pull request with the file!";
+        }
+
+        // when someone submits the input field, this function is called
+        function submit() {
+            if (currentLine >= newLines.length) {
+                done();
+                return;
+            }
+
+            // get the value of the input field
+            var input = document.getElementById("translate").value;
+            // if the input is empty, do nothing
+            if (input == "") {
+                return;
+            }
+
+            currentLine++;
+
+            // set the currentLine to the next line's value (after the equal sign)
+            if (currentLine < newLines.length) {
+                document.getElementById("currentLine").innerHTML =
+                    newLines[currentLine].split("=")[1];
+            }
+            // clear the input field
+            document.getElementById("translate").value = "";
+            // add the input and what was before the line's equal sign to yourLines
+            if (currentLine <= newLines.length) {
+                yourLines.push(newLines[currentLine - 1].split("=")[0] + "=" + input);
+            }
+
+            // update the progress bar
+            document.getElementById("progress").value = currentLine;
+            document.getElementById("progress").max = newLines.length;
+
+            // update the progress text
+            document.getElementById("progressText").innerHTML =
+                currentLine + "/" + newLines.length;
+
+            // if we've reached the end of the file, alert("no more lines") for now (later, we'll export a new file similar to the old one but with the new lines)
+            if (currentLine >= newLines.length) {
+                done();
+                return;
+            }
+        }
+    </script>
+</body>
+
+</html>
